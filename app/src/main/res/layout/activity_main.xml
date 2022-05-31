@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="16dp"
-        android:paddingHorizontal="8dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="16dp">
 
         <Spinner
             android:id="@+id/request_type_spinner"
@@ -26,76 +26,84 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="3"
-            android:padding="8dp"
             android:background="@drawable/border"
             android:hint="www.example.org/api"
-            android:inputType="textUri" />
+            android:inputType="textUri"
+            android:padding="8dp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/primaryDarkColor"/>
+        android:background="@color/primaryDarkColor" />
 
     <TextView
-        android:text="Headers"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_weight="2"
-        android:layout_margin="8dp"
-        android:layout_height="0dp"
-        tools:listitem="@layout/list_item_param"
-        tools:itemCount="1"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/primaryDarkColor"/>
-
-    <TextView
-        android:text="Parameters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="Headers" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/headers_list"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="8dp"
         android:layout_weight="2"
-        android:layout_margin="8dp"
-        tools:listitem="@layout/list_item_param"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="1"
-        android:layout_height="0dp"/>
+        tools:listitem="@layout/list_item_param" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/primaryDarkColor"/>
+        android:background="@color/primaryDarkColor" />
 
     <TextView
-        android:text="Request Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_marginTop="8dp"
+        android:text="Parameters" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/param_list"
         android:layout_width="match_parent"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_height="0dp"
         android:layout_weight="2"
-        tools:listitem="@layout/list_item_param"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="1"
-        android:layout_height="0dp"/>
+        tools:listitem="@layout/list_item_param" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/primaryDarkColor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Request Body" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/body_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_weight="2"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="1"
+        tools:listitem="@layout/list_item_param" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_api_black"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_api_black" />
 
 </LinearLayout>

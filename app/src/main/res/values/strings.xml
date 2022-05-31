@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ApiTester</string>
+
+    <string-array name="spinner_items">
+        <item>GET</item>
+        <item>POST</item>
+    </string-array>
 </resources>
