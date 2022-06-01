@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ResponseActivity"
-    android:fillViewport="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ResponseActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -14,24 +13,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <include
-        android:id="@+id/request_layout"
-        layout="@layout/list_item_request"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        <include
+            android:id="@+id/request_layout"
+            layout="@layout/list_item_request"
+            app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+            app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
         <LinearLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:visibility="invisible"
             android:padding="8dp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/request_layout"
+            app:layout_constraintTop_toBottomOf="@+id/request_layout"
             tools:visibility="visible">
 
             <LinearLayout
@@ -54,6 +53,7 @@
                     android:layout_height="wrap_content"
                     tools:text="code 500" />
             </LinearLayout>
+
             <TextView
                 android:id="@+id/response_text_view"
                 android:layout_width="match_parent"
@@ -72,15 +72,15 @@
 
         <TextView
             android:id="@+id/error_text"
-            android:visibility="gone"
-            tools:visibility="visible"
-            tools:text="Error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/container" />
+            app:layout_constraintTop_toTopOf="@id/container"
+            tools:text="Error"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
