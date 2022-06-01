@@ -27,16 +27,16 @@ class MainActivity : AppCompatActivity() {
         )
 
         val headers: RecyclerView = findViewById(R.id.headers_list)
-        val headersDataSet = MutableList(1) { Pair("", "") }
-        headers.adapter = ParamAdapter("Headers", headersDataSet)
+//        val headersDataSet = MutableList(1) { Pair("", "") }
+        headers.adapter = ParamAdapter("Headers")
 
         val queries: RecyclerView = findViewById(R.id.query_list)
-        val queriesDataSet = MutableList(1) { Pair("", "") }
-        queries.adapter = ParamAdapter("Query Parameters", queriesDataSet)
+//        val queriesDataSet = MutableList(1) { Pair("", "") }
+        queries.adapter = ParamAdapter("Query Parameters")
 
         val body: RecyclerView = findViewById(R.id.body_list)
-        val bodyDataSet = MutableList(1) { Pair("", "") }
-        body.adapter = ParamAdapter("Request Body", bodyDataSet)
+//        val bodyDataSet = MutableList(1) { Pair("", "") }
+        body.adapter = ParamAdapter("Request Body")
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -66,9 +66,9 @@ class MainActivity : AppCompatActivity() {
                     val request = Request(
                         url.text.toString(),
                         spinner.selectedItemPosition,
-                        headersDataSet,
-                        queriesDataSet,
-                        bodyDataSet
+                        (headers.adapter as ParamAdapter).getParams(),
+                        (queries.adapter as ParamAdapter).getParams(),
+                        (body.adapter as ParamAdapter).getParams(),
                     )
 
                     Intent(this, ResponseActivity::class.java).apply {

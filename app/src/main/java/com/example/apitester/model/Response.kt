@@ -1,7 +1,8 @@
 package com.example.apitester.model
 
 data class Response(
-    val status: Int,
-    val code: Int,
-    val responseBody: String
+    val status: Int? = null,
+    val code: Int? = null,
+    val responseBody: String? = null,
+    val error: String? = null
 )

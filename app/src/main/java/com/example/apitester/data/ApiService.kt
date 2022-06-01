@@ -11,23 +11,26 @@ class ApiService private constructor() {
 
     companion object {
         fun makeGetRequest(request: Request): Response {
-            val urlString = request.url
-            if (request.queries.isNotEmpty()) {
-                urlString.plus("?" + request.queries.forEach { it.first + "=" + it.second })
+            var urlString = request.url
+            if (!request.queries.isNullOrEmpty()) {
+                urlString += "?"
+                request.queries.forEach { urlString += "${it.first}=${it.second}&" }
             }
 
             val url = URL(urlString)
-
-            val connection = if (url.protocol.lowercase() == "http")  url.openConnection() as HttpURLConnection else url.openConnection() as HttpsURLConnection
+            val connection = if (url.protocol.lowercase() == "http")
+                url.openConnection() as HttpURLConnection
+            else
+                url.openConnection() as HttpsURLConnection
             connection.apply {
                 requestMethod = "GET"
                 doInput = true
                 doOutput = false
-                request.headers.forEach {
+
+                request.headers?.forEach {
                     if (it.first.isNotEmpty())
                         setRequestProperty(it.first, it.second)
                 }
-
 
                 val responseCode = connection.responseCode
                 val data: String
@@ -46,26 +49,28 @@ class ApiService private constructor() {
         }
 
         fun makePostRequest(request: Request): Response {
-            val urlString = request.url
-            if (request.queries.isNotEmpty()) {
-                urlString.plus("?" + request.queries.forEach { it.first + "=" + it.second })
+            var urlString = request.url
+            if (!request.queries.isNullOrEmpty()) {
+                urlString += "?"
+                request.queries.forEach { urlString += "${it.first}=${it.second}&" }
             }
 
             val url = URL(urlString)
-
-            val connection = url.openConnection() as HttpURLConnection
+            val connection = if (url.protocol.lowercase() == "http")
+                url.openConnection() as HttpURLConnection
+            else
+                url.openConnection() as HttpsURLConnection
             connection.apply {
                 requestMethod = "POST"
                 doInput = true
                 doOutput = true
-                request.headers.forEach {
-                    if (it.first.isNotEmpty()) {
+
+                request.headers?.forEach {
+                    if (it.first.isNotEmpty())
                         setRequestProperty(it.first, it.second)
-                    }
                 }
 
                 val requestBodyWriter: BufferedWriter = connection.outputStream.bufferedWriter()
-
                 request.requestBody?.forEach {
                     if (it.first.isNotEmpty()) {
                         requestBodyWriter.write("${it.first} : ${it.second}")

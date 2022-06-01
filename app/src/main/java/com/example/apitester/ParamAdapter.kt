@@ -1,5 +1,6 @@
 package com.example.apitester
 
+
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,18 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 
 class ParamAdapter(
     private val title: String,
-    private val params: MutableList<Pair<String, String>>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+     private val params = MutableList(1) { Pair("", "") }
+    fun getParams(): MutableList<Pair<String, String>>? {
+        if (params.size == 1 && params[0].first.isEmpty())
+            return null
+        return params
+    }
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val keyEditText: EditText = view.findViewById(R.id.key_edit_text)
@@ -67,16 +74,22 @@ class ParamAdapter(
                 (holder.itemView as TextView).text = title
             }
             is ItemViewHolder -> {
-                holder.keyEditText.doAfterTextChanged { text ->
+                holder.keyEditText.removeTextChangedListener(holder.keyWatcher)
+                holder.keyEditText.setText(params[position - 1].first)
+                holder.keyWatcher = holder.keyEditText.doAfterTextChanged { text ->
                     if (!text.isNullOrBlank()) {
-                        params[position - 1].copy(first = text.toString())
+                        params[position - 1] = params[position - 1].copy(first = text.toString())
+                        notifyItemChanged(position - 1)
                     }
-
                 }
 
-                holder.valueEditText.doAfterTextChanged { text ->
+                holder.valueEditText.removeTextChangedListener(holder.valueWatcher)
+                holder.valueEditText.setText(params[position - 1].second)
+                holder.valueWatcher = holder.valueEditText.doAfterTextChanged { text ->
                     if (!text.isNullOrBlank()) {
-                        params[position - 1].copy(second = text.toString())
+                        params[position - 1] = params[position - 1].copy(second = text.toString())
+                        notifyItemChanged(position - 1)
+
                     }
                 }
             }

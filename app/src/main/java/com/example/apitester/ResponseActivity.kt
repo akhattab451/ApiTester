@@ -1,5 +1,6 @@
 package com.example.apitester
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -29,6 +30,15 @@ class ResponseActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Resp
             putSerializable("request", request)
         }
 
+        findViewById<TextView>(R.id.request_type_text).text = when(request.requestType) {
+            0 -> "GET"
+            else -> "POST"
+        }
+
+        findViewById<TextView>(R.id.url_text).text = request.url
+
+        findViewById<TextView>(R.id.request_details_text).text = request.params()
+
         LoaderManager.getInstance(this).initLoader(1, bundle, this)
     }
 
@@ -45,20 +55,37 @@ class ResponseActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Resp
         val progressBar: ProgressBar = findViewById(R.id.loading_indicator)
         progressBar.visibility = View.GONE
 
-        if (data == null) {
-            findViewById<TextView>(R.id.error_text).apply {
-                text = "Error Retrieving Data"
-                visibility = View.VISIBLE
-            }
+        when {
+            data == null -> {
+                findViewById<TextView>(R.id.error_text).apply {
+                    text = "Error Retrieving Data"
+                    visibility = View.VISIBLE
+                }
 
-        } else {
-            findViewById<LinearLayout>(R.id.container).visibility = View.VISIBLE
-            findViewById<TextView>(R.id.status_text_view).text = when(data.status) {
-                0 -> "SUCCESS"
-                else -> "FAILURE"
             }
-            findViewById<TextView>(R.id.code_text_view).text = data.code.toString()
-            findViewById<TextView>(R.id.response_text_view).text = data.responseBody
+            data.error != null -> {
+                findViewById<TextView>(R.id.error_text).apply {
+                    text = data.error
+                    visibility = View.VISIBLE
+                }
+            }
+            else -> {
+                findViewById<LinearLayout>(R.id.container).visibility = View.VISIBLE
+                findViewById<TextView>(R.id.status_text_view).apply {
+                    when(data.status) {
+                        0 -> {
+                            text = "SUCCESS"
+                            setTextColor(Color.GREEN)
+                        }
+                        else -> {
+                            text = "FAILURE"
+                            setTextColor(Color.RED)
+                        }
+                    }
+                }
+                findViewById<TextView>(R.id.code_text_view).text = data.code.toString()
+                findViewById<TextView>(R.id.response_text_view).text = data.responseBody
+            }
         }
     }
 
