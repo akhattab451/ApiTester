@@ -7,9 +7,8 @@ import java.net.HttpURLConnection
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
-class ApiService private constructor() {
+object ApiService {
 
-    companion object {
         fun makeGetRequest(request: Request): Response {
             var urlString = request.url
             if (!request.queries.isNullOrEmpty()) {
@@ -91,5 +90,4 @@ class ApiService private constructor() {
                 return Response(status, responseCode, data)
             }
         }
-    }
 }

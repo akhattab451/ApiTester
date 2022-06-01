@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ParamAdapter(
     private val title: String,
+    private val params: MutableList<Pair<String, String>>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-     private val params = MutableList(1) { Pair("", "") }
-    fun getParams(): MutableList<Pair<String, String>>? {
-        if (params.size == 1 && params[0].first.isEmpty())
-            return null
-        return params
-    }
+//     private val params = MutableList(1) { Pair("", "") }
+//    fun getParams(): MutableList<Pair<String, String>>? {
+//        if (params.size == 1 && params[0].first.isEmpty())
+//            return null
+//        return params
+//    }
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val keyEditText: EditText = view.findViewById(R.id.key_edit_text)
