@@ -50,9 +50,13 @@ class MainActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                body.visibility = when (position) {
-                    0 -> View.GONE
-                    else -> View.VISIBLE
+                when (position) {
+                    0 -> {
+                        body.visibility = View.GONE
+                    }
+                    else -> {
+                        body.visibility = View.VISIBLE
+                    }
                 }
             }
 

@@ -9,7 +9,7 @@ data class Request(
     val queries: List<Pair<String, String>>?,
     val requestBody: List<Pair<String, String>>?,
 ) : Serializable {
-    fun params(): String {
+    fun getParams(): String {
         var paramsString = "{\n"
 
         if (headers != null) {
@@ -18,14 +18,12 @@ data class Request(
                 paramsString += "${it.first}: ${it.second}\n"
             }
         }
-
         if (queries != null) {
             paramsString += "Queries\n"
             queries.forEach {
                 paramsString +="${it.first}: ${it.second}\n"
             }
         }
-
         if (requestBody != null) {
             paramsString += "Request Body\n"
             requestBody.forEach {

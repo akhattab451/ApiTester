@@ -17,8 +17,8 @@ class RequestAsyncTaskLoader(context: Context, private val args: Bundle?)
     }
 
     override fun loadInBackground(): Response {
-        if (Util.isConnected(context)) {
-            return  Response(error = "App is not connected to the internet")
+        if (!Util.isConnected(context)) {
+            return Response(error = "App is not connected to the internet")
         }
 
         val request = args!!.getSerializable("request") as Request

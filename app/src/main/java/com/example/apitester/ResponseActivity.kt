@@ -37,7 +37,14 @@ class ResponseActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Resp
 
         findViewById<TextView>(R.id.url_text).text = request.url
 
-        findViewById<TextView>(R.id.request_details_text).text = request.params()
+        request.run {
+            if (headers != null || queries != null || requestBody != null) {
+                findViewById<TextView>(R.id.request_details_text).apply {
+                    visibility = View.VISIBLE
+                    text = getParams()
+                }
+            }
+        }
 
         LoaderManager.getInstance(this).initLoader(1, bundle, this)
     }
