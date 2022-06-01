@@ -8,17 +8,22 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import com.example.apitester.async.RequestAsyncTaskLoader
+import com.example.apitester.data.database.RequestDBHelper
 import com.example.apitester.model.Request
 import com.example.apitester.model.Response
 
 class ResponseActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Response> {
 
+    lateinit var database: RequestDBHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_response)
+        database = RequestDBHelper(this)
 
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
@@ -41,9 +46,9 @@ class ResponseActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Resp
             if (headers != null || queries != null || requestBody != null) {
                 findViewById<TextView>(R.id.request_details_text).apply {
                     visibility = View.VISIBLE
-                    text = Util.pairListToString("headers", headers) +
-                            Util.pairListToString("queries", queries) +
-                            Util.pairListToString("request_body", requestBody)
+                    text = "Headers:" + Util.pairListToString(headers) +
+                            "\nQueries:" +  Util.pairListToString(queries) +
+                            "\nRequest Body:" + Util.pairListToString(requestBody)
                 }
             }
         }
@@ -57,7 +62,7 @@ class ResponseActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Resp
     }
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Response> {
-        return RequestAsyncTaskLoader(this, args)
+        return RequestAsyncTaskLoader(this, database, args)
     }
 
     override fun onLoadFinished(loader: Loader<Response>, data: Response?) {

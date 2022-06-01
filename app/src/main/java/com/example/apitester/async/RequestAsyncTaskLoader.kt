@@ -11,11 +11,11 @@ import com.example.apitester.data.database.RequestDBHelper
 import com.example.apitester.model.Request
 import com.example.apitester.model.Response
 import java.lang.Exception
+import java.time.LocalDateTime
+import java.util.*
 
-class RequestAsyncTaskLoader(context: Context, private val args: Bundle?)
+class RequestAsyncTaskLoader(context: Context, private val database: RequestDBHelper, private val args: Bundle?)
     : AsyncTaskLoader<Response>(context) {
-
-    private val db by lazy { RequestDBHelper(context).writableDatabase }
 
     override fun onStartLoading() {
         super.onStartLoading()
@@ -42,15 +42,22 @@ class RequestAsyncTaskLoader(context: Context, private val args: Bundle?)
         val values = ContentValues().apply {
             put(RequestEntry.COLUMN_NAME_URL, request.url)
             put(RequestEntry.COLUMN_NAME_REQUEST_TYPE, request.requestType)
-            put(RequestEntry.COLUMN_NAME_HEADERS, Util.pairListToString(RequestEntry.COLUMN_NAME_HEADERS, request.headers))
-            put(RequestEntry.COLUMN_NAME_QUERIES, Util.pairListToString(RequestEntry.COLUMN_NAME_HEADERS, request.queries))
-            put(RequestEntry.COLUMN_NAME_REQUEST_BODY, Util.pairListToString(RequestEntry.COLUMN_NAME_HEADERS, request.requestBody))
+            put(RequestEntry.COLUMN_NAME_HEADERS, Util.pairListToString(request.headers))
+            put(RequestEntry.COLUMN_NAME_QUERIES, Util.pairListToString(request.queries))
+            put(RequestEntry.COLUMN_NAME_REQUEST_BODY, Util.pairListToString(request.requestBody))
             put(RequestEntry.COLUMN_NAME_STATUS, response.status)
             put(RequestEntry.COLUMN_NAME_CODE, response.code)
             put(RequestEntry.COLUMN_NAME_RESPONSE_BODY, response.responseBody)
+            put(RequestEntry.COLUMN_NAME_TIMESTAMP, System.currentTimeMillis() / 1000)
         }
 
+        val db = database.writableDatabase
         db.insert(RequestEntry.TABLE_NAME, null, values)
         return response
+    }
+
+    override fun onStopLoading() {
+        super.onStopLoading()
+        database.close()
     }
 }

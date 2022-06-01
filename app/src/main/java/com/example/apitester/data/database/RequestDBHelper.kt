@@ -32,7 +32,7 @@ class RequestDBHelper(context: Context)
                     "${RequestContract.RequestEntry.COLUMN_NAME_STATUS} INTEGER," +
                     "${RequestContract.RequestEntry.COLUMN_NAME_CODE} INTEGER," +
                     "${RequestContract.RequestEntry.COLUMN_NAME_RESPONSE_BODY} TEXT," +
-                    "${RequestContract.RequestEntry.COLUMN_NAME_TIMESTAMP} DATETIME DEFAULT TIMESTAMP)"
+                    "${RequestContract.RequestEntry.COLUMN_NAME_TIMESTAMP} INT)"
 
 
         private const val SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS ${RequestContract.RequestEntry.TABLE_NAME}"

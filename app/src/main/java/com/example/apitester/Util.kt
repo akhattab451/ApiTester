@@ -24,17 +24,17 @@ object Util {
         return false
     }
 
-    fun pairListToString(name: String, list: List<Pair<String, String>>?): String {
+    fun pairListToString(list: List<Pair<String, String>>?): String {
         if (list == null)
-            return ""
+            return "[]"
 
-        var listString = "$name : {\n"
+        var listString = "[\n"
         list.forEach {
             if (it.first.isNotEmpty()) {
-                listString += "\t${it.first}: ${it.second}\n"
+                listString += "\t${it.first}: ${it.second},\n"
             }
         }
-        listString += "}\n"
+        listString += "]\n"
 
         return listString
     }
@@ -43,6 +43,13 @@ object Util {
         if (params.size == 1 && params[0].first.isEmpty())
             return null
         return params
+    }
+
+    fun listFromString(listString: String): List<Pair<String, String>> {
+        return listString.takeIf { it != "[" || it != "]" || it != "\n" || it != "\t" }!!.split(",").map {
+            val pair = it.split(":")
+             Pair(pair[0], pair[1])
+        }
     }
 
 }

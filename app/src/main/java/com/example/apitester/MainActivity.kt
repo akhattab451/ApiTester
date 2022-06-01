@@ -76,9 +76,9 @@ class MainActivity : AppCompatActivity() {
                     val request = Request(
                         url.text.toString(),
                         spinner.selectedItemPosition,
-                        Util.getValidParamList(headersDataSet),
-                        Util.getValidParamList(queriesDataSet),
-                        Util.getValidParamList(bodyDataSet)
+                        headers = Util.getValidParamList(headersDataSet),
+                        queries = Util.getValidParamList(queriesDataSet),
+                        requestBody = Util.getValidParamList(bodyDataSet)
                     )
 
                     Intent(this, ResponseActivity::class.java).apply {
