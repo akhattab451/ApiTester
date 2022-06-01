@@ -38,75 +38,56 @@
         app:layout_constraintTop_toBottomOf="@+id/request_type_text"
         tools:text="Request Details" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/response_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/request_details_text">
+
+        <TextView
+            android:id="@+id/status_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="SUCCESS" />
+
+        <TextView
+            android:id="@+id/code_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/status_text_view"
+            app:layout_constraintStart_toEndOf="@+id/status_text_view"
+            app:layout_constraintTop_toTopOf="@+id/status_text_view"
+            tools:text="code 500" />
+
+        <TextView
+            android:id="@+id/response_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:text="Response Body"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/status_text_view" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <View
+        android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginTop="8dp"
+        android:visibility="gone"
         android:background="@color/primaryDarkColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/request_details_text" />
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/headers_title"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="Headers"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/request_type_text"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/request_type_text" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/headers_text"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/headers_title"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/headers_title"/>-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/params_title"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="Params"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/headers_text"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/headers_text" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/params_text"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/params_title"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/params_title"/>-->
-
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/body_title"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="Request Body"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/params_text"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/params_text" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/body_text"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/body_title"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/body_title"/>-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/response_title"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="Response"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/body_text"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/body_text" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/response_text"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/response_title"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/response_title"/>-->
+        app:layout_constraintTop_toBottomOf="@+id/response_container" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

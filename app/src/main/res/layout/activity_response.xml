@@ -20,47 +20,6 @@
             app:layout_constraintStart_toEndOf="@+id/constraintLayout"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-        <LinearLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/request_layout"
-            tools:visibility="visible">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/status_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    tools:text="SUCCESS" />
-
-                <TextView
-                    android:id="@+id/code_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="code 500" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/response_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-        </LinearLayout>
-
         <ProgressBar
             android:id="@+id/loading_indicator"
             android:layout_width="wrap_content"
@@ -68,7 +27,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/container" />
+            app:layout_constraintTop_toTopOf="@id/request_layout" />
 
         <TextView
             android:id="@+id/error_text"
@@ -79,7 +38,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/container"
+            app:layout_constraintTop_toTopOf="@id/request_layout"
             tools:text="Error"
             tools:visibility="visible" />
 

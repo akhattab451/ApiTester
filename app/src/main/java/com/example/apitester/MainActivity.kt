@@ -5,6 +5,9 @@ import android.content.res.TypedArray
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -73,9 +76,9 @@ class MainActivity : AppCompatActivity() {
                     val request = Request(
                         url.text.toString(),
                         spinner.selectedItemPosition,
-                        getValidParamList(headersDataSet),
-                        getValidParamList(queriesDataSet),
-                        getValidParamList(bodyDataSet)
+                        Util.getValidParamList(headersDataSet),
+                        Util.getValidParamList(queriesDataSet),
+                        Util.getValidParamList(bodyDataSet)
                     )
 
                     Intent(this, ResponseActivity::class.java).apply {
@@ -86,9 +89,17 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    private fun getValidParamList(params: List<Pair<String, String>>): List<Pair<String, String>>? {
-        if (params.size == 1 && params[0].first.isEmpty())
-            return null
-        return params
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Intent(this, HistoryActivity::class.java).apply {
+            startActivity(this)
+        }
+        return true
+    }
+
 }

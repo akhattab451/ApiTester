@@ -10,8 +10,9 @@
         <entry key="app/src/main/res/layout/footer_param_list.xml" value="0.67" />
         <entry key="app/src/main/res/layout/header_param_list.xml" value="0.11875" />
         <entry key="app/src/main/res/layout/list_item_param.xml" value="0.11875" />
-        <entry key="app/src/main/res/layout/list_item_request.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/list_item_request.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_item_response.xml" value="0.11875" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

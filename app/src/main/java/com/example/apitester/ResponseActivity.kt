@@ -30,7 +30,7 @@ class ResponseActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Resp
             putSerializable("request", request)
         }
 
-        findViewById<TextView>(R.id.request_type_text).text = when(request.requestType) {
+        findViewById<TextView>(R.id.request_type_text).text = when (request.requestType) {
             0 -> "GET"
             else -> "POST"
         }
@@ -41,7 +41,9 @@ class ResponseActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Resp
             if (headers != null || queries != null || requestBody != null) {
                 findViewById<TextView>(R.id.request_details_text).apply {
                     visibility = View.VISIBLE
-                    text = getParams()
+                    text = Util.pairListToString("headers", headers) +
+                            Util.pairListToString("queries", queries) +
+                            Util.pairListToString("request_body", requestBody)
                 }
             }
         }
@@ -79,7 +81,7 @@ class ResponseActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Resp
             else -> {
                 findViewById<LinearLayout>(R.id.container).visibility = View.VISIBLE
                 findViewById<TextView>(R.id.status_text_view).apply {
-                    when(data.status) {
+                    when (data.status) {
                         0 -> {
                             text = "SUCCESS"
                             setTextColor(Color.GREEN)
